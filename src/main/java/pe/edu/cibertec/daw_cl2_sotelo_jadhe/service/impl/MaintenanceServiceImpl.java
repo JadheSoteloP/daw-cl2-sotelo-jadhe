@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 import pe.edu.cibertec.daw_cl2_sotelo_jadhe.dto.FilmDetailDto;
 import pe.edu.cibertec.daw_cl2_sotelo_jadhe.dto.FilmDto;
 import pe.edu.cibertec.daw_cl2_sotelo_jadhe.entity.Film;
+import pe.edu.cibertec.daw_cl2_sotelo_jadhe.entity.Language;
 import pe.edu.cibertec.daw_cl2_sotelo_jadhe.repository.FilmRepository;
 import pe.edu.cibertec.daw_cl2_sotelo_jadhe.service.MaintenanceService;
+import pe.edu.cibertec.daw_cl2_sotelo_jadhe.repository.LanguageRepository;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +21,13 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     @Autowired
     FilmRepository filmRepository;
 
+    @Autowired
+    private LanguageRepository languageRepository;
+
+    public List<Language> findAllLanguages() {
+        return languageRepository.findAll();
+    }
+
     @Override
     public List<FilmDto> findAllFilms() {
 
@@ -28,7 +37,6 @@ public class MaintenanceServiceImpl implements MaintenanceService {
             FilmDto filmDto = new FilmDto(film.getFilmId(),
                     film.getTitle(),
                     film.getLanguage().getName(),
-                    film.getRentalDuration(),
                     film.getRentalRate());
             films.add(filmDto);
         });
@@ -77,5 +85,29 @@ public class MaintenanceServiceImpl implements MaintenanceService {
                 }
         ).orElse(false);
     }
+
+    @Override
+    public void createFilm(FilmDetailDto filmDetailDto) {
+        Optional<Language> optionalLanguage = languageRepository.findById(filmDetailDto.languageId());
+        if (optionalLanguage.isPresent()) {
+            Film film = new Film();
+            film.setTitle(filmDetailDto.title());
+            film.setDescription(filmDetailDto.description());
+            film.setReleaseYear(filmDetailDto.releaseYear());
+            film.setLanguage(optionalLanguage.get());
+            film.setRentalDuration(filmDetailDto.rentalDuration());
+            film.setRentalRate(filmDetailDto.rentalRate());
+            film.setLength(filmDetailDto.length());
+            film.setReplacementCost(filmDetailDto.replacementCost());
+            film.setRating(filmDetailDto.rating());
+            film.setSpecialFeatures(filmDetailDto.specialFeatures());
+            film.setLastUpdate(new Date());
+
+            filmRepository.save(film);
+        } else {
+            throw new IllegalArgumentException("El lenguaje seleccionado no es válido");
+        }
+    }
+
 
 }

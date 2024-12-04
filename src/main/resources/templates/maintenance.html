@@ -14,12 +14,13 @@
         <h3>Mantenimiento de Películas</h3>
     </div>
 
+    <a th:href="@{/maintenance/new}">Nuevo Film</a>
+
     <table class="table table-striped">
         <tr>
             <th>Código</th>
             <th>Título</th>
             <th>Idioma</th>
-            <th>Tiempo de alquiler</th>
             <th>Precio de alquiler</th>
             <th colspan="2">Acciones</th>
         </tr>
@@ -29,7 +30,6 @@
             </td>
             <td th:text="${film.title()}"></td>
             <td th:text="${film.language()}"></td>
-            <td th:text="${film.rentalDuration()}"></td>
             <td th:text="${film.rentalRate()}"></td>
             <td>
                 <a th:href="@{/maintenance/edit/{id}(id=${film.filmId()})}">Editar</a>

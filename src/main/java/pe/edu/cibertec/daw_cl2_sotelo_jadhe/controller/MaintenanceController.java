@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.*;
 import pe.edu.cibertec.daw_cl2_sotelo_jadhe.dto.FilmDetailDto;
 import pe.edu.cibertec.daw_cl2_sotelo_jadhe.dto.FilmDto;
 import pe.edu.cibertec.daw_cl2_sotelo_jadhe.service.MaintenanceService;
+import pe.edu.cibertec.daw_cl2_sotelo_jadhe.entity.Language;
 
+
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -44,5 +47,23 @@ public class MaintenanceController {
         maintenanceService.updateFilm(filmDetailDto);
         return "redirect:/maintenance/start";
     }
+
+    @GetMapping("/new")
+    public String newFilm(Model model) {
+        FilmDetailDto filmDetailDto = new FilmDetailDto(null, "", "", null, null, "", null, null, null, null, "", "", new Date());
+        model.addAttribute("film", filmDetailDto);
+
+        List<Language> languages = maintenanceService.findAllLanguages();
+        model.addAttribute("languages", languages);
+
+        return "maintenance_new";
+    }
+
+    @PostMapping("/new")
+    public String saveNewFilm(@ModelAttribute FilmDetailDto filmDetailDto) {
+        maintenanceService.createFilm(filmDetailDto);
+        return "redirect:/maintenance/start";
+    }
+
 
 }
