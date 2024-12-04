@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -32,4 +33,12 @@ public class Film {
     @JoinColumn(name = "language_id")
     private Language language;
 
+    @OneToMany(mappedBy = "film", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<FilmActor> filmActors;
+
+    @OneToMany(mappedBy = "film", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<FilmCategory> filmCategories;
+
+    @OneToMany(mappedBy = "film", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Inventory> inventories;
 }

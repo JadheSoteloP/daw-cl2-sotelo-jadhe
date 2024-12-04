@@ -5,4 +5,5 @@ import pe.edu.cibertec.daw_cl2_sotelo_jadhe.entity.Film;
 
 public interface FilmRepository extends CrudRepository<Film, Integer> {
 
+   // void deleteById(Integer id);
 }

@@ -18,4 +18,6 @@ public interface MaintenanceService {
 
     List<Language> findAllLanguages();
 
+    void deleteFilmById(Integer id);
+
 }

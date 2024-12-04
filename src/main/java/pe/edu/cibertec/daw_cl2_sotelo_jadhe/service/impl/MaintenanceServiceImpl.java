@@ -109,5 +109,13 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         }
     }
 
+    @Override
+    public void deleteFilmById(Integer id) {
+        if (filmRepository.existsById(id)) {
+            filmRepository.deleteById(id);
+        } else {
+            throw new IllegalArgumentException("La película con ID " + id + " no existe.");
+        }
+    }
 
 }
