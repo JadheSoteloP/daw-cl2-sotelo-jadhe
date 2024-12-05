@@ -3,10 +3,12 @@ package pe.edu.cibertec.daw_cl2_sotelo_jadhe.config;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@EnableCaching
 public class HikariCpConfig {
 
     @Value("${DB_SAKILA_URL}")

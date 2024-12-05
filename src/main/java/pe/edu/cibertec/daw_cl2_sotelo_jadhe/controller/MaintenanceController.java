@@ -66,10 +66,10 @@ public class MaintenanceController {
         return "redirect:/maintenance/start";
     }
 
-    @GetMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String deleteFilm(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         try {
-            maintenanceService.deleteFilmById(id);
+            maintenanceService.deleteFilmById(id);  // Lógica de eliminación en cascada
             redirectAttributes.addFlashAttribute("successMessage", "Película eliminada exitosamente.");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "No se pudo eliminar la película: " + e.getMessage());

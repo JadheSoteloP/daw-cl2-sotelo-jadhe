@@ -11,7 +11,7 @@
 	<groupId>pe.edu.cibertec</groupId>
 	<artifactId>daw-cl2-sotelo-jadhe</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>web-backoffice-lym</name>
+	<name>daw-cl2-sotelo-jadhe</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
