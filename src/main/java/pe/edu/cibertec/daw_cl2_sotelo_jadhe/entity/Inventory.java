@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -23,4 +24,8 @@ public class Inventory {
 
     private Integer storeId;
     private Date lastUpdate;
+
+    @OneToMany(mappedBy = "inventory", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Rental> rentals;
+
 }
